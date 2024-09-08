@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ArticleListPage } from './article/article-list/article-list.page';
+import { ArticleDetailPage } from './article/article-detail/article-detail.page';
 
 const routes: Routes = [
   {
@@ -8,9 +10,18 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full'
   },
+  { 
+    path: 'article-list', component: ArticleListPage 
+  },
+  { 
+    path: 'article/:id', component: ArticleDetailPage 
+  },
+  { 
+    path: '', redirectTo: 'article-list', pathMatch: 'full' 
+  }
 ];
 
 @NgModule({
