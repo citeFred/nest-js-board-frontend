@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -12,6 +12,7 @@ import { ArticleListPageModule } from './article/article-list/article-list.modul
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    RouterModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
