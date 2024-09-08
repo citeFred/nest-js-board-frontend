@@ -12,20 +12,17 @@ export class ArticleListPage implements OnInit {
 
   constructor(private articleService: ArticleService, private router: Router) {} // Router 주입
 
-  ngOnInit() {
-    this.articleService.getAllArticles().subscribe(response => {
-      console.log(this.articles)
-      console.log(response)
+  async ngOnInit() {
+    try {
+      const response = await this.articleService.getAllArticles();
       if (response.success) {
         this.articles = response.data;
-        console.log(this.articles)
-
       } else {
         console.error(response.message);
-        console.log(this.articles)
-
       }
-    });
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
   }
 
   viewArticle(id: number) {

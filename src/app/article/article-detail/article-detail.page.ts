@@ -15,18 +15,20 @@ export class ArticleDetailPage implements OnInit {
     private articleService: ArticleService
   ) {}
 
-  ngOnInit() {
-    this.loadArticle();
+  async ngOnInit() {
+    await this.loadArticle();
   }
 
-  loadArticle() {
+  async loadArticle() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.articleService.getArticleById(+id).subscribe((response: any) => {
+      try {
+        const response = await this.articleService.getArticleById(+id);
         this.article = response.data;
-      });
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
     } else {
-      // id가 null일 때의 처리
       console.error('Article ID is null');
     }
   }
