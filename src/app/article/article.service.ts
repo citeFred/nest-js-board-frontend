@@ -1,7 +1,5 @@
 // article.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 export interface Article {
   id: number;
@@ -23,14 +21,31 @@ interface ApiResponse<T> {
 export class ArticleService {
   private apiUrl = 'http://localhost:3000/api'; // 실제 API URL로 변경
 
-  constructor(private http: HttpClient) {}
-
-  getAllArticles(): Observable<ApiResponse<Article[]>> {
-    return this.http.get<ApiResponse<Article[]>>(`${this.apiUrl}/articles`);
+  async getAllArticles(): Promise<ApiResponse<Article[]>> {
+    try {
+      const response = await fetch(`${this.apiUrl}/articles`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data: ApiResponse<Article[]> = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      throw error;
+    }
   }
 
-  getArticleById(id: number): Observable<ApiResponse<Article>> {
-    return this.http.get<ApiResponse<Article>>(`${this.apiUrl}/articles/${id}`); // 수정
+  async getArticleById(id: number): Promise<ApiResponse<Article>> {
+    try {
+      const response = await fetch(`${this.apiUrl}/articles/${id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data: ApiResponse<Article> = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      throw error;
+    }
   }
-  
 }
