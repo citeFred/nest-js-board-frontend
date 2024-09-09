@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ArticleDetailPage } from './article-detail.page';
-import { ArticleDetailPageRoutingModule } from './article-detail-routing.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -11,7 +10,6 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     IonicModule,
-    ArticleDetailPageRoutingModule,
     RouterModule.forChild([{ path: '', component: ArticleDetailPage}])
 
   ],
