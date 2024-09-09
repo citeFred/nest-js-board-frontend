@@ -1,4 +1,3 @@
-// article.service.ts
 import { Injectable } from '@angular/core';
 
 export interface Article {
@@ -21,14 +20,15 @@ interface ApiResponse<T> {
 export class ArticleService {
   private apiUrl = 'http://localhost:3000/api'; // 실제 API URL로 변경
 
+  // 기본 JavaScript의 요청 Fetch를 활용한 방법
   async getAllArticles(): Promise<ApiResponse<Article[]>> {
     try {
-      const response = await fetch(`${this.apiUrl}/articles`);
+      const response = await fetch(`${this.apiUrl}/articles`); // 엔드포인트 localhost:3000/api/articles 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data: ApiResponse<Article[]> = await response.json();
-      return data;
+      return data; // API 요청 시 Response 데이터(이는 POSTMAN API의 응답 데이터와 같음)
     } catch (error) {
       console.error('Fetch error:', error);
       throw error;

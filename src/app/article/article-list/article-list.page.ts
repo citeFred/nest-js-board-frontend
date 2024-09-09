@@ -27,6 +27,6 @@ export class ArticleListPage implements OnInit {
 
   viewArticle(id: number) {
     // 상세 페이지로 이동 (예: article-detail 페이지로 이동)
-    this.router.navigate(['/article-detail', id]);
+    this.router.navigate(['/article-list/detail', id]);
   }
 }
