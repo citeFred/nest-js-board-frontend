@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { UserRole } from '../user-role.enum';
+import { Router } from '@angular/router'; // Router를 사용하여 로그인 후 페이지 이동
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ export class SignUpComponent {
   address: string = '';
   detailAddress: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async onSignUp() {
     if (this.password !== this.passwordConfirm) {
@@ -40,6 +41,7 @@ export class SignUpComponent {
       if (response.success) {
         console.log('Sign Up successful:', response.data);
         // Redirect or show a success message
+        this.router.navigate(['auth']);
       } else {
         console.error('Sign Up failed:', response.message);
       }
