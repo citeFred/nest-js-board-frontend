@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
-import { HomeComponentRoutingModule } from './home-routing.module';
 
 
 @NgModule({
@@ -12,8 +12,8 @@ import { HomeComponentRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeComponentRoutingModule
+    HomeRoutingModule
   ],
   declarations: [HomeComponent]
 })
-export class HomeComponentModule {}
+export class HomeModule {}
