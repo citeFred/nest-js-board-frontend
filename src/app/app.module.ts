@@ -4,8 +4,6 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ArticleListPageModule } from './article/article-list/article-list.module';
-import { ArticleDetailPageModule } from './article/article-list/article-detail/article-detail.module';
 import { HomePageModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,8 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ArticleDetailPageModule,
-    ArticleListPageModule,
     HomePageModule,
     HttpClientModule,
   ],

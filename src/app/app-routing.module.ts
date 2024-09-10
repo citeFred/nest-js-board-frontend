@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home/home.page';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: HomeComponent
   },
   {
     path: 'article-list',
-    loadChildren: () => import('./article/article-list/article-list.module').then(m => m.ArticleListPageModule)
+    loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
   },
   {
     path: 'auth',

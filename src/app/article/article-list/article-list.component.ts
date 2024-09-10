@@ -5,10 +5,10 @@ import { ArticleResponseData } from 'src/app/models/article/article-response-dat
 
 @Component({
   selector: 'app-article-list',
-  templateUrl: './article-list.page.html',
-  styleUrls: ['./article-list.page.scss'],
+  templateUrl: './article-list.component.html',
+  styleUrls: ['./article-list.component.scss'],
 })
-export class ArticleListPage implements OnInit {
+export class ArticleListComponent implements OnInit {
   articles: ArticleResponseData[] = [];
 
   constructor(private articleService: ArticleService, private router: Router) {}

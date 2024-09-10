@@ -8,12 +8,12 @@ import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     AuthRoutingModule
-  ]
+  ],
+  declarations: [SignInComponent, SignUpComponent]
 })
 export class AuthModule { }

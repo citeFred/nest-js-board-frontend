@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '../../article.service';
+import { ArticleService } from '../article.service';
 import { ArticleResponseData } from 'src/app/models/article/article-response-data.interface';
 
 @Component({
   selector: 'app-article-detail',
-  templateUrl: './article-detail.page.html',
-  styleUrls: ['./article-detail.page.scss'],
+  templateUrl: './article-detail.component.html',
+  styleUrls: ['./article-detail.component.scss'],
 })
-export class ArticleDetailPage implements OnInit {
+export class ArticleDetailComponent implements OnInit {
   article: ArticleResponseData | undefined;
 
   constructor(
