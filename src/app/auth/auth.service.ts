@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SignInRequestData } from '../models/auth/auth-signin-request-data.interface';
+import { SignUpRequestData } from '../models/auth/auth-signup-request-data.interface';
+import { AuthResponse } from '../models/auth/auth-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -6,54 +11,15 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api/auth';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  async signUp(signUpData: any): Promise<any> {
-    try {
-      const response = await fetch(`${this.apiUrl}/signup`, {
-        method: 'POST',
-        credentials: 'include', // 요청에 쿠키(JWT)를 포함
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(signUpData),
-      });
-  
-      // 응답 상태 코드와 메시지 확인
-      if (!response.ok) {
-        const errorText = await response.text(); // 에러 메시지 읽기
-        console.error('Network response was not ok:', errorText);
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Fetch error:', error);
-      throw error;
-    }
-  }  
+  signUp(signUpRequestData: SignUpRequestData): Observable<AuthResponse> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<AuthResponse>(`${this.apiUrl}/signup`, signUpRequestData, { headers, withCredentials: true });
+  }
 
-  async signIn(signInData: { email: string; password: string }): Promise<any> {
-    try {
-      const response = await fetch(`${this.apiUrl}/signin`, {
-        method: 'POST',
-        credentials: 'include', // 요청에 쿠키(JWT)를 포함
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(signInData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Sign In error:', error);
-      throw error;
-    }
+  signIn(signInRequestData: SignInRequestData): Observable<AuthResponse> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<AuthResponse>(`${this.apiUrl}/signin`, signInRequestData, { headers, withCredentials: true });
   }
 }

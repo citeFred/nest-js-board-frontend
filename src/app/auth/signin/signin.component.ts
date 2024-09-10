@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router'; // Router를 사용하여 로그인 후 페이지 이동
+import { Router } from '@angular/router';
+import { SignInRequestData } from 'src/app/models/auth/auth-signin-request-data.interface';
 
 @Component({
   selector: 'app-signin',
@@ -11,25 +12,25 @@ export class SignInComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {} // AuthService와 Router 주입
+  constructor(private authService: AuthService, private router: Router) {}
 
-  async onSignIn() {
-    const signInData = {
+  onSignIn() {
+    const signInRequestData: SignInRequestData = {
       email: this.email,
       password: this.password,
     };
 
-    try {
-      const response = await this.authService.signIn(signInData);
-
-      // 로그인 성공 후 대시보드 또는 홈 페이지로 이동
-      if (response.success) {
-        this.router.navigate(['/']);
-      } else {
-        console.error('Sign In failed:', response.message);
+    this.authService.signIn(signInRequestData).subscribe({
+      next: response => {
+        if (response.success) {
+          this.router.navigate(['/']);
+        } else {
+          console.error('Sign In failed:', response.message);
+        }
+      },
+      error: err => {
+        console.error('Sign In error:', err);
       }
-    } catch (error) {
-      console.error('Sign In error:', error);
-    }
+    });
   }
 }

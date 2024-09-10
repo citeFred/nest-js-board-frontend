@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { UserRole } from '../user-role.enum';
-import { Router } from '@angular/router'; // Router를 사용하여 로그인 후 페이지 이동
+import { UserRole } from '../../models/common/user-role.enum';
+import { Router } from '@angular/router';
+import { SignUpRequestData } from 'src/app/models/auth/auth-signup-request-data.interface';
 
 @Component({
   selector: 'app-signup',
@@ -20,13 +21,13 @@ export class SignUpComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  async onSignUp() {
+  onSignUp() {
     if (this.password !== this.passwordConfirm) {
       console.error('Passwords do not match');
       return;
     }
 
-    const signUpData = {
+    const signUpRequestData: SignUpRequestData = {
       username: this.username,
       password: this.password,
       email: this.email,
@@ -36,17 +37,18 @@ export class SignUpComponent {
       detailAddress: this.detailAddress,
     };
     
-    try {
-      const response = await this.authService.signUp(signUpData);
-      if (response.success) {
-        console.log('Sign Up successful:', response.data);
-        // Redirect or show a success message
-        this.router.navigate(['auth']);
-      } else {
-        console.error('Sign Up failed:', response.message);
+    this.authService.signUp(signUpRequestData).subscribe({
+      next: response => {
+        if (response.success) {
+          console.log('Sign Up successful:', response.data);
+          this.router.navigate(['auth']);
+        } else {
+          console.error('Sign Up failed:', response.message);
+        }
+      },
+      error: err => {
+        console.error('Sign Up error:', err);
       }
-    } catch (error) {
-      console.error('Sign Up error:', error);
-    }
+    });
   }
 }
