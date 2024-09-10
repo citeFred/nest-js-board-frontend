@@ -23,7 +23,10 @@ export class ArticleService {
   // 기본 JavaScript의 요청 Fetch를 활용한 방법
   async getAllArticles(): Promise<ApiResponse<Article[]>> {
     try {
-      const response = await fetch(`${this.apiUrl}/articles`); // 엔드포인트 localhost:3000/api/articles 
+      const response = await fetch(`${this.apiUrl}/articles`, {
+        method: 'GET',
+        credentials: 'include' // 요청에 쿠키(JWT)를 포함
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -37,7 +40,10 @@ export class ArticleService {
 
   async getArticleById(id: number): Promise<ApiResponse<Article>> {
     try {
-      const response = await fetch(`${this.apiUrl}/articles/${id}`);
+      const response = await fetch(`${this.apiUrl}/articles/${id}`, {
+        method: 'GET',
+        credentials: 'include' // 요청에 쿠키(JWT)를 포함
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

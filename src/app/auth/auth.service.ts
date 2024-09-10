@@ -12,6 +12,7 @@ export class AuthService {
     try {
       const response = await fetch(`${this.apiUrl}/signup`, {
         method: 'POST',
+        credentials: 'include', // 요청에 쿠키(JWT)를 포함
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,11 +38,11 @@ export class AuthService {
     try {
       const response = await fetch(`${this.apiUrl}/signin`, {
         method: 'POST',
+        credentials: 'include', // 요청에 쿠키(JWT)를 포함
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(signInData),
-        credentials: 'include', // 쿠키 포함 설정
       });
 
       if (!response.ok) {
