@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Router 추가
-import { Article, ArticleService } from '../article.service';
+import { Router } from '@angular/router';
+import { ArticleService } from '../article.service';
+import { ArticleResponseData } from 'src/app/models/article/article-response-data.interface';
 
 @Component({
   selector: 'app-article-list',
@@ -8,25 +9,26 @@ import { Article, ArticleService } from '../article.service';
   styleUrls: ['./article-list.page.scss'],
 })
 export class ArticleListPage implements OnInit {
-  articles: Article[] = [];
+  articles: ArticleResponseData[] = [];
 
-  constructor(private articleService: ArticleService, private router: Router) {} // Router 주입
+  constructor(private articleService: ArticleService, private router: Router) {}
 
-  async ngOnInit() {
-    try {
-      const response = await this.articleService.getAllArticles();
-      if (response.success) {
-        this.articles = response.data;
-      } else {
-        console.error(response.message);
+  ngOnInit() {
+    this.articleService.getAllArticles().subscribe({
+      next: response => {
+        if (response.success) {
+          this.articles = response.data;
+        } else {
+          console.error(response.message);
+        }
+      },
+      error: err => {
+        console.error('Error fetching articles:', err);
       }
-    } catch (error) {
-      console.error('Fetch error:', error);
-    }
+    });
   }
 
   viewArticle(id: number) {
-    // 상세 페이지로 이동 (예: article-detail 페이지로 이동)
     this.router.navigate(['/article-list/detail', id]);
   }
 }
