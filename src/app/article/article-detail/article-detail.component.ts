@@ -33,6 +33,9 @@ export class ArticleDetailComponent implements OnInit {
         },
         error: err => {
           console.error('Error fetching article:', err);
+        },
+        complete: () => {
+          console.log('Fetching an article request completed.');
         }
       });
     } else {

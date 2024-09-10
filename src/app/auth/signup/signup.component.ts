@@ -48,6 +48,9 @@ export class SignUpComponent {
       },
       error: err => {
         console.error('Sign Up error:', err);
+      },
+      complete: () => {
+        console.log('Sign Up request completed.');
       }
     });
   }

@@ -30,6 +30,9 @@ export class SignInComponent {
       },
       error: err => {
         console.error('Sign In error:', err);
+      },
+      complete: () => {
+        console.log('Sign In request completed.');
       }
     });
   }

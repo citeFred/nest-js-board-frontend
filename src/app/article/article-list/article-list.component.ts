@@ -24,6 +24,9 @@ export class ArticleListComponent implements OnInit {
       },
       error: err => {
         console.error('Error fetching articles:', err);
+      },
+      complete: () => {
+        console.log('Fetching articles request completed.');
       }
     });
   }
