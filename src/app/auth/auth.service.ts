@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SignInRequestData } from '../models/auth/auth-signin-request-data.interface';
-import { SignUpRequestData } from '../models/auth/auth-signup-request-data.interface';
 import { AuthResponse } from '../models/auth/auth-response.interface';
 
 @Injectable({
@@ -13,9 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signUp(signUpRequestData: SignUpRequestData): Observable<AuthResponse> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<AuthResponse>(`${this.apiUrl}/signup`, signUpRequestData, { headers, withCredentials: true });
+  signUp(formData: FormData): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/signup`, formData, { withCredentials: true });
   }
 
   signIn(signInRequestData: SignInRequestData): Observable<AuthResponse> {

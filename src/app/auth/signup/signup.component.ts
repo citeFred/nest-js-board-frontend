@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { UserRole } from '../../models/common/user-role.enum';
 import { Router } from '@angular/router';
-import { SignUpRequestData } from 'src/app/models/auth/auth-signup-request-data.interface';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +17,7 @@ export class SignUpComponent {
   postalCode: string = '';
   address: string = '';
   detailAddress: string = '';
+  profilePicture: File | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -27,17 +27,23 @@ export class SignUpComponent {
       return;
     }
 
-    const signUpRequestData: SignUpRequestData = {
-      username: this.username,
-      password: this.password,
-      email: this.email,
-      role: this.role,
-      postalCode: this.postalCode,
-      address: this.address,
-      detailAddress: this.detailAddress,
-    };
+    // FormData를 사용하여 데이터를 서버로 전송
+    const formData = new FormData();
+    formData.append('username', this.username);
+    formData.append('password', this.password);
+    formData.append('email', this.email);
+    formData.append('role', this.role);
+    formData.append('postalCode', this.postalCode);
+    formData.append('address', this.address);
+    formData.append('detailAddress', this.detailAddress);
     
-    this.authService.signUp(signUpRequestData).subscribe({
+    // 프로필 사진이 선택된 경우 FormData에 추가
+    if (this.profilePicture) {
+      formData.append('profilePicture', this.profilePicture);
+    }
+
+    // 회원가입 API 호출
+    this.authService.signUp(formData).subscribe({
       next: response => {
         if (response.success) {
           console.log('Sign Up successful:', response.data);
@@ -53,5 +59,13 @@ export class SignUpComponent {
         console.log('Sign Up request completed.');
       }
     });
+  }
+
+  // 파일 선택 시 호출되는 메서드
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.profilePicture = file;
+    }
   }
 }
