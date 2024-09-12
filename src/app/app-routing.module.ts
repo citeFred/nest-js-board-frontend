@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeModule } from './home/home.module';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeModule
+    path: '', component: HomeComponent
   },
   {
     path: 'article-list',
