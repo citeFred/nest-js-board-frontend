@@ -42,7 +42,7 @@ export class MypageComponent implements OnInit {
   setProfileImage() {
     if (this.user && this.user.files) {
       const profileFile = this.user.files.find(file => file.fileType === 'PROFILE');
-      this.profileImage = profileFile ? profileFile.path : undefined;
+      this.profileImage = profileFile ? profileFile.url : undefined;
     }
   }
 }
