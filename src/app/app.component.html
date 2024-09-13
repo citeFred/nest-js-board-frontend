@@ -1,57 +1,13 @@
 <ion-app>
+    <!-- Header -->
+    <app-header></app-header>
+
     <!-- Side Menu Navigation -->
-    <ion-menu side="end" contentId="main-content">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item routerLink="/auth">SignIn & SignUp</ion-item>
-          <ion-item routerLink="/article-list">Article List</ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    
-  <!-- Header -->
-  <ion-header>
-    <ion-toolbar>
-      <!-- Logo -->
-      <ion-buttons slot="start">
-        <ion-button class="profile-icon-button" routerLink="/">
-          <img src='/assets/logo.png' class="profile-icon" alt="Profile Icon" />
-        </ion-button>
-      </ion-buttons>
+    <app-menu></app-menu>
 
-      <!-- App Title -->
-      <ion-title class="ion-text-center">
-      Board App
-      </ion-title>
+    <!-- Main Contents -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
 
-      <!-- MyPage -->
-      <ion-buttons slot="end">
-        <ion-button class="profile-icon-button" routerLink="/my-page">
-          <img src='/assets/default-profile.png' class="profile-icon" alt="Profile Icon" />
-        </ion-button>
-      </ion-buttons>
-
-      <!-- Menu -->
-      <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <!-- Main Contents -->
-  <ion-router-outlet id="main-content"></ion-router-outlet>
-
-  <!-- Footer -->
-  <ion-footer>
-    <ion-toolbar>
-      <ion-title id="footer-text-box" class="ion-text-center">
-        <p id="footer-text">ⓒ 2024. yzpocket.citeFred, All Rights Reserved.</p>
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>
+    <!-- Footer -->
+    <app-footer></app-footer>
 </ion-app>
