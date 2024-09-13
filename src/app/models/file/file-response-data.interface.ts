@@ -7,6 +7,7 @@ export interface FileResponseData {
     path: string;
     size: number;
     fileType: FileType;
+    url: string;
     createdAt: Date;
     updatedAt: Date;
 }
