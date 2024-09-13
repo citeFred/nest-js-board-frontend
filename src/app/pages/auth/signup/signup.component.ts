@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { UserRole } from '../../models/common/user-role.enum';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { UserRole } from 'src/app/models/common/user-role.enum';
 
 @Component({
   selector: 'app-signup',

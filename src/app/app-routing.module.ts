@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -8,11 +8,11 @@ const routes: Routes = [
   },
   {
     path: 'article-list',
-    loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
+    loadChildren: () => import('./pages/article/article.module').then(m => m.ArticleModule)
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   }
 ];
 
