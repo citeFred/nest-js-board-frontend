@@ -5,7 +5,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeModule } from './home/home.module';
+import { HomeModule } from './pages/home/home.module';
+import { LayoutsModule } from './layouts/layouts.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
+    LayoutsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
