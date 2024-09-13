@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SignInRequestData } from '../../models/auth/auth-signin-request-data.interface';
 import { AuthResponse } from '../../models/auth/auth-response.interface';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,28 @@ export class AuthService {
   signIn(signInRequestData: SignInRequestData): Observable<AuthResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<AuthResponse>(`${this.apiUrl}/signin`, signInRequestData, { headers, withCredentials: true });
+  }
+
+  getUserIdFromToken(): number | null {
+    const token = this.getCookie('Authorization');
+    console.log("token:"+ token)
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.userId;
+    }
+    return null;
+  }
+  
+
+  private getCookie(name: string): string | null {
+    const value = `; ${document.cookie}`;
+    console.log("document.cookie:"+ value)
+
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      const cookieValue = parts.pop()?.split(';').shift();
+      return cookieValue ? cookieValue : null;
+    }
+    return null;
   }
 }
