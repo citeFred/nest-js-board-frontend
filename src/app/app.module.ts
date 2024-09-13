@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './pages/home/home.module';
 import { LayoutsModule } from './layouts/layouts.module';
+import { MypageModule } from './pages/mypage/mypage.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,7 @@ import { LayoutsModule } from './layouts/layouts.module';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
+    MypageModule,
     LayoutsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

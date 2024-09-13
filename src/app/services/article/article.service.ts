@@ -8,17 +8,17 @@ import { ArticleResponseData } from '../../models/article/article-response-data.
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:3000/api'; // 실제 API URL로 변경
+  private apiUrl = 'http://localhost:3000/api/articles';
 
   constructor(private http: HttpClient) { }
 
   getAllArticles(): Observable<ApiResponse<ArticleResponseData[]>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<ApiResponse<ArticleResponseData[]>>(`${this.apiUrl}/articles`, { headers, withCredentials: true });
+    return this.http.get<ApiResponse<ArticleResponseData[]>>(`${this.apiUrl}`, { headers, withCredentials: true });
   }
 
   getArticleById(id: number): Observable<ApiResponse<ArticleResponseData>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<ApiResponse<ArticleResponseData>>(`${this.apiUrl}/articles/${id}`, { headers, withCredentials: true });
+    return this.http.get<ApiResponse<ArticleResponseData>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
   }
 }
