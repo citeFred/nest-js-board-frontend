@@ -10,15 +10,18 @@ import { UserWithFilesResponseData } from 'src/app/models/user/user-with-file-re
 })
 export class MypageComponent implements OnInit {
   user: UserWithFilesResponseData | undefined;
+  profileImage: string | undefined;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    const userId = 1; // 임시 1번 유저 하드코딩
+    const userId = 17; // 임시 1번 유저 하드코딩
     this.userService.getUserProfileById(userId).subscribe({
       next: response => {
         if (response.success) {
           this.user = response.data;
+          this.setProfileImage();
+
         } else {
           console.error(response.message);
         }
@@ -30,5 +33,12 @@ export class MypageComponent implements OnInit {
         console.log('Fetching user request completed.');
       }
     });
+  }
+
+  setProfileImage() {
+    if (this.user && this.user.files) {
+      const profileFile = this.user.files.find(file => file.fileType === 'PROFILE');
+      this.profileImage = profileFile ? profileFile.path : undefined;
+    }
   }
 }
