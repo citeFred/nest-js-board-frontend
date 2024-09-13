@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'mypage',
+    loadChildren: () => import('./pages/mypage/mypage.module').then( m => m.MypagePageModule)
   }
 ];
 
