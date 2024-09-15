@@ -21,4 +21,9 @@ export class ArticleService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<ApiResponse<ArticleResponseData>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
   }
+
+  writeArticle(formData: FormData): Observable<ApiResponse<ArticleResponseData>> {
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    return this.http.post<ApiResponse<ArticleResponseData>>(`${this.apiUrl}`, formData, { headers, withCredentials: true });
+  }
 }
