@@ -32,6 +32,6 @@ export class ArticleListComponent implements OnInit {
   }
 
   viewArticle(id: number) {
-    this.router.navigate(['/article-list/detail', id]);
+    this.router.navigate(['/articles/detail', id]);
   }
 }

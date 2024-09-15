@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { ArticleWriteComponent } from './article-write/article-write.component';
 
 const routes: Routes = [
   {
     path: '', component: ArticleListComponent
+  }, 
+  {
+    path: 'list', component: ArticleListComponent
   },
   {
     path: 'detail/:id', component: ArticleDetailComponent
-  }
+  },
+  {
+    path: 'write', component: ArticleWriteComponent
+  },
 ];
 
 @NgModule({
