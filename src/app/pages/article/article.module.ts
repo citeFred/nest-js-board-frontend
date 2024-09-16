@@ -6,6 +6,7 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { ArticleWriteComponent } from './article-write/article-write.component';
+import { ArticlePaginatedListComponent } from './article-pagenated-list/article-paginated-list.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { ArticleWriteComponent } from './article-write/article-write.component';
     IonicModule,
     ArticleRoutingModule
   ],
-  declarations: [ArticleListComponent, ArticleDetailComponent, ArticleWriteComponent]
+  declarations: [ArticleListComponent, ArticlePaginatedListComponent, ArticleDetailComponent, ArticleWriteComponent]
 })
 export class ArticleModule {}
