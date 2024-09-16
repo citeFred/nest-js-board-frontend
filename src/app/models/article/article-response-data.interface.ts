@@ -2,5 +2,19 @@ export interface ArticleResponseData {
     id: number;
     title: string;
     contents: string;
-    // 기타 필요한 필드
+    author: string;
+    createdAt: Date;
+    updatedAt: Date;
+    user: {
+        id: number;
+        username: string;
+        //...
+    };
+    attachments: {
+        id: number;
+        filename: string;
+        path: string;
+        url: string;
+        //...
+    }[];
 }

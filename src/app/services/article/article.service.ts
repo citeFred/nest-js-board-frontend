@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/common/api-response.interface';
 import { ArticleResponseData } from '../../models/article/article-response-data.interface';
+import { ArticlePaginatedResponse } from 'src/app/models/article/article-paginated-response-data.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,11 @@ export class ArticleService {
   getAllArticles(): Observable<ApiResponse<ArticleResponseData[]>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<ApiResponse<ArticleResponseData[]>>(`${this.apiUrl}`, { headers, withCredentials: true });
+  }
+
+  getPaginatedArticles(page: number, limit: number): Observable<ApiResponse<ArticlePaginatedResponse>> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get<ApiResponse<ArticlePaginatedResponse>>(`${this.apiUrl}/paginated?page=${page}&limit=${limit}`, { headers, withCredentials: true });
   }
 
   getArticleById(id: number): Observable<ApiResponse<ArticleResponseData>> {
