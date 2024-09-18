@@ -1,4 +1,4 @@
-export interface ArticleResponseData {
+export interface ArticleWithAttachmentAndUserResponseData {
     id: number;
     title: string;
     contents: string;
