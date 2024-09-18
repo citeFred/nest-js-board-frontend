@@ -1,4 +1,4 @@
-import { FileResponseData } from "../file/file-response-data.interface";
+import { ProfilePictureResponseData } from "../profile-picture/profile-picture-response-data.interface";
 import { UserRole } from "./user-role.enum";
 
 export interface UserWithFilesResponseData {
@@ -9,5 +9,5 @@ export interface UserWithFilesResponseData {
     postalCode: string;
     address: string;
     detailAddress: string;
-    files: FileResponseData[];
+    profilePictures: ProfilePictureResponseData[];
 }
