@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleService } from '../../../services/article/article.service';
-import { ArticleResponseData } from 'src/app/models/article/article-response-data.interface';
+import { ArticleWithUserResponseData } from 'src/app/models/article/article-with-user-response-data.interface';
 
 @Component({
   selector: 'app-article-paginated-list',
@@ -9,7 +9,7 @@ import { ArticleResponseData } from 'src/app/models/article/article-response-dat
   styleUrls: ['./article-paginated-list.component.scss'],
 })
 export class ArticlePaginatedListComponent implements OnInit {
-  articles: ArticleResponseData[] = [];
+  articles: ArticleWithUserResponseData[] = [];
   currentPage: number = 1;
   limit: number = 10;
   totalPages: number = 0;
