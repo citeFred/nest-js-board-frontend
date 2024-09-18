@@ -7,7 +7,7 @@ import { ArticlePaginatedListComponent } from './article-pagenated-list/article-
 
 const routes: Routes = [
   {
-    path: '', component: ArticleListComponent
+    path: '', component: ArticlePaginatedListComponent
   }, 
   {
     path: 'list', component: ArticleListComponent

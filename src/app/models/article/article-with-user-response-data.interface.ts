@@ -1,4 +1,4 @@
-export interface ArticleResponseData {
+export interface ArticleWithUserResponseData {
     id: number;
     title: string;
     contents: string;
@@ -10,11 +10,4 @@ export interface ArticleResponseData {
         username: string;
         //...
     };
-    attachments: {
-        id: number;
-        filename: string;
-        path: string;
-        url: string;
-        //...
-    }[];
 }

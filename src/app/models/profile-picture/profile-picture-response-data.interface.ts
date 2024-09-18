@@ -1,12 +1,12 @@
-import { FileType } from "./file-type.enum";
+import { ProfilePictureType } from "./profile-picture-type.enum";
 
-export interface FileResponseData {
+export interface ProfilePictureResponseData {
     id: number;
     filename: string;
     mimetype: string;
     path: string;
     size: number;
-    fileType: FileType;
+    profilePictureType: ProfilePictureType;
     url: string;
     createdAt: Date;
     updatedAt: Date;

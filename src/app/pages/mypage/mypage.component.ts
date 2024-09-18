@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
-import { ApiResponse } from 'src/app/models/common/api-response.interface'; // ApiResponse 인터페이스 임포트
+import { ApiResponse } from 'src/app/models/common/api-response.interface';
 import { UserWithFilesResponseData } from 'src/app/models/user/user-with-file-response-data.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -40,8 +40,8 @@ export class MypageComponent implements OnInit {
   }
 
   setProfileImage() {
-    if (this.user && this.user.files) {
-      const profileFile = this.user.files.find(file => file.fileType === 'PROFILE');
+    if (this.user && this.user.profilePictures) {
+      const profileFile = this.user.profilePictures.find(profilePicture => profilePicture.profilePictureType === 'IMAGE');
       this.profileImage = profileFile ? profileFile.url : undefined;
     }
   }

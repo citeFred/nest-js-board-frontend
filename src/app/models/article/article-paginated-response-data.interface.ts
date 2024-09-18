@@ -1,6 +1,6 @@
-import { ArticleResponseData } from "./article-response-data.interface";
+import { ArticleWithUserResponseData } from "./article-with-user-response-data.interface";
 
 export interface ArticlePaginatedResponse {
-    articles: ArticleResponseData[];
+    articles: ArticleWithUserResponseData[];
     totalCount: number;
 }
