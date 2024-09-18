@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../../services/article/article.service';
-import { ArticleResponseData } from 'src/app/models/article/article-response-data.interface';
+import { ArticleWithAttachmentAndUserResponseData } from 'src/app/models/article/article-with-attachment-user-response-data.interface';
 
 @Component({
   selector: 'app-article-detail',
@@ -9,7 +9,7 @@ import { ArticleResponseData } from 'src/app/models/article/article-response-dat
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
-  article: ArticleResponseData | undefined;
+  article: ArticleWithAttachmentAndUserResponseData | undefined;
 
   constructor(
     private route: ActivatedRoute,

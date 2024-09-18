@@ -8,9 +8,22 @@
   <ion-card *ngIf="article">
     <ion-card-header>
       <ion-card-title>{{ article.title }}</ion-card-title>
+      <ion-card-subtitle>
+        <p>작성자: {{ article.user.username }}</p>
+        <p>작성 시간: {{ article.createdAt | date: 'short' }}</p> <!-- 날짜 포맷 -->
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <p>{{ article.contents }}</p>
+      
+      <!-- 첨부파일이 있는 경우 이미지 태그로 표시 -->
+      <div *ngIf="article.attachments && article.attachments.length > 0">
+        <h3>첨부파일:</h3>
+        <div *ngFor="let attachment of article.attachments">
+          <img [src]="attachment.url" alt="{{ attachment.filename }}" style="max-width: 100%; height: auto;"/>
+          <p>{{ attachment.filename }}</p>
+        </div>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
