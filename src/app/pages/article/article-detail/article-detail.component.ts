@@ -42,4 +42,30 @@ export class ArticleDetailComponent implements OnInit {
       console.error('Article ID is null');
     }
   }
+  isImage(url: string): boolean {
+    return url.match(/\.(jpeg|jpg|gif|png|bmp|webp)$/i) !== null;
+  }
+  
+  downloadFile(url: string) {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob(); // Blob 형태로 변환
+      })
+      .then(blob => {
+        const link = document.createElement('a');
+        const url = window.URL.createObjectURL(blob);
+        link.href = url;
+        link.setAttribute('download', '');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Download failed:', error);
+      });
+  }
 }

@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; // 전체 화면 높이를 차지
+  }
+  
+  ion-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // 전체 높이를 차지하도록 설정
+  }
+  
+  app-header {
+    flex: 0 0 auto; // 헤더의 크기는 자동
+  }
+  
+  app-footer {
+    flex: 0 0 auto; // 푸터의 크기는 자동
+  }
+
+
+  
+  ion-router-outlet {
+    flex: 1; // 남은 공간을 차지
+    padding-top: 56px; // 네비게이션 바 높이
+    padding-bottom: 56px; // 푸터 높이
+  }
+  

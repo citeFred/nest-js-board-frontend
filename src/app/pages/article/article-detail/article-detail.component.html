@@ -1,29 +1,61 @@
 <ion-header>
-  <ion-toolbar>
     <ion-title>Article Detail</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="article">
+  <ion-card *ngIf="article" class="card">
+
+    <!-- 게시글 제목 헤더 -->
     <ion-card-header>
-      <ion-card-title>{{ article.title }}</ion-card-title>
-      <ion-card-subtitle>
-        <p>작성자: {{ article.user.username }}</p>
-        <p>작성 시간: {{ article.createdAt | date: 'short' }}</p> <!-- 날짜 포맷 -->
-      </ion-card-subtitle>
+      <ion-card-title class="card-title">{{ article.title }}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+
+    <!-- 게시글 정보 서브타이틀 -->
+    <ion-card-subtitle class="card-header">
+      <ion-item>
+        <ion-label>작성자: {{ article.user.username }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>작성일: {{ article.createdAt | date: 'short' }}</ion-label>
+      </ion-item>
+    </ion-card-subtitle>
+
+    <!-- 게시글 본문 -->
+    <ion-card-content class="card-content">
+      <!-- 본문 내용 -->
       <p>{{ article.contents }}</p>
-      
-      <!-- 첨부파일이 있는 경우 이미지 태그로 표시 -->
-      <div *ngIf="article.attachments && article.attachments.length > 0">
+      <!-- 첨부파일 이미지 본문 추가 -->
+      <ion-list *ngIf="article.attachments && article.attachments.length > 0">
+        <ion-item *ngFor="let attachment of article.attachments">
+          <img *ngIf="isImage(attachment.url)" [src]="attachment.url" alt="{{ attachment.filename }}" class="thumbnail-img"/>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <ion-card-content class="attachment-card">
+      <!-- 첨부파일이 다운로드 부분 -->
+      <ion-list *ngIf="article.attachments && article.attachments.length > 0">
         <h3>첨부파일:</h3>
-        <div *ngFor="let attachment of article.attachments">
-          <img [src]="attachment.url" alt="{{ attachment.filename }}" style="max-width: 100%; height: auto;"/>
-          <p>{{ attachment.filename }}</p>
-        </div>
-      </div>
+        <ion-item *ngFor="let attachment of article.attachments">
+          <ion-card class="attachment-card">
+            <ion-card-header>
+              <ion-card-subtitle>{{ attachment.filename }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-thumbnail slot="start">
+                <img [src]="attachment.url" alt="{{ attachment.filename }}" class="thumbnail-img"/>
+              </ion-thumbnail>
+              <ion-label>
+                <p>파일 링크가 필요하시면 클릭하세요.</p>
+              </ion-label>
+              <ion-button slot="end" fill="outline" (click)="downloadFile(attachment.url)">
+                <ion-icon slot="start" name="download"></ion-icon>
+                첨부파일 받기
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
