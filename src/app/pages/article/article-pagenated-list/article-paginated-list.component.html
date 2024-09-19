@@ -1,32 +1,32 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title>Articles</ion-title>
-    </ion-toolbar>
+    <ion-title>Articles</ion-title>
 </ion-header>
   
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let article of articles" (click)="viewArticle(article.id)">
-            <ion-label>
-                <h2>{{ article.title }}</h2>
-                <p>{{ article.contents }}</p>
-            </ion-label>
-        </ion-item>
-    </ion-list>
+    <ion-card class="card">
+        <ion-list>
+            <ion-item *ngFor="let article of articles" (click)="viewArticle(article.id)">
+                <ion-label>
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.contents }}</p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
 
-    <div class="pagination">
-        <ion-button 
-        [disabled]="currentPage === 1" 
-        (click)="changePage(currentPage - 1)">
-        Previous
-        </ion-button>
+        <div class="pagination">
+            <ion-button 
+            [disabled]="currentPage === 1" 
+            (click)="changePage(currentPage - 1)">
+            Previous
+            </ion-button>
 
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
 
-        <ion-button 
-        [disabled]="currentPage === totalPages" 
-        (click)="changePage(currentPage + 1)">
-        Next
-        </ion-button>
-    </div>
+            <ion-button 
+            [disabled]="currentPage === totalPages" 
+            (click)="changePage(currentPage + 1)">
+            Next
+            </ion-button>
+        </div>
+    </ion-card>
 </ion-content>
