@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../../services/article/article.service';
 import { ArticleWithAttachmentAndUserResponseData } from 'src/app/models/article/article-with-attachment-user-response-data.interface';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-article-detail',
@@ -11,12 +12,14 @@ import { Location } from '@angular/common';
 })
 export class ArticleDetailComponent implements OnInit {
   article: ArticleWithAttachmentAndUserResponseData | undefined;
+  showDeleteAlert: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
     private location: Location,
-    private router: Router    
+    private router: Router,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -85,4 +88,53 @@ export class ArticleDetailComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  async confirmDelete() {
+    const alert = await this.alertController.create({
+      header: '게시글 삭제',
+      message: '정말로 이 게시글을 삭제하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancel',
+          handler: () => {
+            console.log('삭제가 취소되었습니다.');
+          }
+        },
+        {
+          text: '삭제',
+          handler: () => {
+            this.deleteArticle();
+          }
+        }
+      ]
+    });
+    await alert.present(); // 알림 표시
+  }
+
+  deleteArticle() {
+    const articleId = this.route.snapshot.paramMap.get('id');
+    
+    if (articleId) {
+      this.articleService.deleteArticle(+articleId).subscribe({
+        next: response => {
+          if (response.success) {
+            console.log('Delete an article successful:', response.data);
+            this.router.navigate(['articles']);
+          } else {
+            console.error('Delete an article failed:', response.message);
+          }
+        },
+        error: err => {
+          console.error('Delete an article error:', err);
+        },
+        complete: () => {
+          console.log('Delete an article request completed.');
+        }
+      });
+    } else {
+      console.error('Article ID is null, cannot delete the article.');
+    }
+  }
 }
+
