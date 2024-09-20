@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../../services/article/article.service';
 import { ArticleWithAttachmentAndUserResponseData } from 'src/app/models/article/article-with-attachment-user-response-data.interface';
 import { Location } from '@angular/common';
@@ -15,7 +15,8 @@ export class ArticleDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
-    private location: Location
+    private location: Location,
+    private router: Router    
   ) {}
 
   ngOnInit() {
@@ -71,8 +72,14 @@ export class ArticleDetailComponent implements OnInit {
       });
   }
 
-  editArticle() {
-
+  updateArticle() {
+    const articleId = this.route.snapshot.paramMap.get('id');
+    console.log("update article's id:"+articleId)
+    if (articleId) {
+      this.router.navigate(['articles/update', articleId]);
+    } else {
+      console.error('Article ID is null, cannot navigate to edit page.');
+    }
   }
 
   goBack() {
