@@ -4,6 +4,7 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { ArticleWriteComponent } from './article-write/article-write.component';
 import { ArticlePaginatedListComponent } from './article-pagenated-list/article-paginated-list.component';
+import { ArticleUpdateComponent } from './article-update/article-update.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,9 @@ const routes: Routes = [
   },
   {
     path: 'write', component: ArticleWriteComponent
+  },
+  {
+    path: 'update/:id', component: ArticleUpdateComponent
   },
 ];
 
