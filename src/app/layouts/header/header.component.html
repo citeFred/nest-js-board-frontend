@@ -11,10 +11,19 @@
       </ion-title>
   
         <ion-buttons slot="end">
-            <ion-button class="profile-icon-button" routerLink="/my-page">
-            <img src='/assets/default-profile.png' class="profile-icon" alt="Profile Icon" />
-            </ion-button>
-            <ion-menu-button>       </ion-menu-button>
+            <!-- 마이페이지 -->
+            <ng-container *ngIf="isLoggedIn; else loggedOut">
+              <ion-button class="profile-icon-button" routerLink="/my-page">
+                <img [src]="userProfilePicture" class="profile-icon" alt="Profile Icon" />
+              </ion-button>
+            </ng-container>
+            <ng-template #loggedOut>
+              <ion-button class="profile-icon-button" routerLink="/auth">
+                <img src='/assets/default-profile.png' class="profile-icon" alt="Profile Icon" />
+              </ion-button>
+            </ng-template>  
+            <!-- 메뉴 버튼 -->
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>

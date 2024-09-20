@@ -32,7 +32,6 @@ export class AuthService {
     return null;
   }
   
-
   private getCookie(name: string): string | null {
     const value = `; ${document.cookie}`;
     console.log("document.cookie:"+ value)
@@ -41,6 +40,20 @@ export class AuthService {
     if (parts.length === 2) {
       const cookieValue = parts.pop()?.split(';').shift();
       return cookieValue ? cookieValue : null;
+    }
+    return null;
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.getCookie('Authorization');
+    return !!token;
+  }
+
+  getUserProfilePictureFromToken(): string | null {
+    const token = this.getCookie('Authorization');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.profilePictureUrl || null; // 프로필 사진 URL 반환
     }
     return null;
   }
