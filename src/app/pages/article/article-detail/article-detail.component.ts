@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../../../services/article/article.service';
 import { ArticleWithAttachmentAndUserResponseData } from 'src/app/models/article/article-with-attachment-user-response-data.interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-article-detail',
@@ -13,7 +14,8 @@ export class ArticleDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -67,5 +69,13 @@ export class ArticleDetailComponent implements OnInit {
       .catch(error => {
         console.error('Download failed:', error);
       });
+  }
+
+  editArticle() {
+
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
