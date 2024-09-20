@@ -33,4 +33,14 @@ export class ArticleService {
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
     return this.http.post<ApiResponse<ArticleWithAttachmentAndUserResponseData>>(`${this.apiUrl}`, formData, { headers, withCredentials: true });
   }
+
+  updateArticle(id: number, formData: FormData): Observable<ApiResponse<ArticleWithAttachmentAndUserResponseData>> {
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    return this.http.put<ApiResponse<ArticleWithAttachmentAndUserResponseData>>(`${this.apiUrl}/${id}`, formData, { headers, withCredentials: true });
+  }
+
+  deleteArticle(id: number): Observable<ApiResponse<void>> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
+  }
 }

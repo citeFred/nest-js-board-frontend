@@ -57,5 +57,14 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
+
+    <ion-list>
+      <ion-item>
+        <ion-button color="tertiary" slot="start" (click)="updateArticle()">수정하기</ion-button>
+        <ion-button color="primary" slot="end" (click)="goBack()">돌아가기</ion-button>
+        <ion-button color="danger" (click)="confirmDelete()">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>
