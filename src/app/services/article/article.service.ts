@@ -33,4 +33,9 @@ export class ArticleService {
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
     return this.http.post<ApiResponse<ArticleWithAttachmentAndUserResponseData>>(`${this.apiUrl}`, formData, { headers, withCredentials: true });
   }
+
+  updateArticle(id: number, formData: FormData): Observable<ApiResponse<ArticleWithAttachmentAndUserResponseData>> {
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    return this.http.put<ApiResponse<ArticleWithAttachmentAndUserResponseData>>(`${this.apiUrl}/${id}`, formData, { headers, withCredentials: true });
+  }
 }
