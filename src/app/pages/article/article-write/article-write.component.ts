@@ -24,8 +24,8 @@ export class ArticleWriteComponent {
     }
     console.log(this.title)
     console.log(this.contents)
-    console.log(formData.get('title')); // 특정 키의 값을 가져옵니다
-    console.log(formData.get('contents')); // 특정 키의 값을 가져옵니다
+    console.log(formData.get('title'));
+    console.log(formData.get('contents'));
 
     // 게시글 작성 API 호출
     this.articleService.writeArticle(formData).subscribe({
