@@ -17,6 +17,11 @@ export class UserService {
     return this.http.get<ApiResponse<UserWithProfilePictureResponseData>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
   }
 
+  updateUser(id: number, formData: FormData): Observable<ApiResponse<UserWithProfilePictureResponseData>> {
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    return this.http.put<ApiResponse<UserWithProfilePictureResponseData>>(`${this.apiUrl}/${id}`, formData, { headers, withCredentials: true });
+  }
+
   deleteUser(id: number): Observable<ApiResponse<void>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
