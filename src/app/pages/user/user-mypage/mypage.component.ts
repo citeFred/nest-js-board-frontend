@@ -66,6 +66,17 @@ export class MypageComponent implements OnInit {
     this.location.back();
   }
 
+
+  updateUser() {
+    const userId = this.authService.getUserIdFromToken();
+    console.log("update user's id:"+userId)
+    if (userId) {
+      this.router.navigate(['my-page/update', userId]);
+    } else {
+      console.error('User ID is null, cannot navigate to edit page.');
+    }
+  }
+
   async confirmDelete() {
     const alert = await this.alertController.create({
       header: '회원 탈퇴',
