@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { MypageComponent } from './pages/mypage/mypage.component';
 
 const routes: Routes = [
   {
@@ -16,7 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'my-page', component: MypageComponent
+    path: 'my-page',
+    loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
   }
 ];
 
