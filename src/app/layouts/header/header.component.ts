@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserWithFilesResponseData } from 'src/app/models/user/user-with-file-response-data.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 

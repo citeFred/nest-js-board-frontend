@@ -1,7 +1,7 @@
 import { ProfilePictureResponseData } from "../profile-picture/profile-picture-response-data.interface";
 import { UserRole } from "./user-role.enum";
 
-export interface UserWithFilesResponseData {
+export interface UserWithProfilePictureResponseData {
     id: number;
     username: string;
     email: string;

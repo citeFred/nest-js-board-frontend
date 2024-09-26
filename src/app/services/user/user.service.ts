@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/models/common/api-response.interface';
-import { UserWithFilesResponseData } from 'src/app/models/user/user-with-file-response-data.interface';
+import { UserWithProfilePictureResponseData } from 'src/app/models/user/user-with-profile-picture-response-data.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,13 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserProfileById(id: number): Observable<ApiResponse<UserWithFilesResponseData>> {
+  getUserProfileById(id: number): Observable<ApiResponse<UserWithProfilePictureResponseData>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<ApiResponse<UserWithFilesResponseData>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
+    return this.http.get<ApiResponse<UserWithProfilePictureResponseData>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
+  }
+
+  deleteUser(id: number): Observable<ApiResponse<void>> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${id}`, { headers, withCredentials: true });
   }
 }
