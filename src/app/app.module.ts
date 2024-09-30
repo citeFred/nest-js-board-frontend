@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './pages/home/home.module';
 import { LayoutsModule } from './layouts/layouts.module';
+import { ErrorModule } from './pages/error/error.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { LayoutsModule } from './layouts/layouts.module';
     HttpClientModule,
     HomeModule,
     LayoutsModule,
+    ErrorModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
