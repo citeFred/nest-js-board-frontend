@@ -31,6 +31,15 @@ export class AuthService {
     }
     return null;
   }
+
+  getUserRoleFromToken(): string | null {
+    const token = this.getCookie('Authorization');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.role || null;
+    }
+    return null;
+  }
   
   private getCookie(name: string): string | null {
     const value = `; ${document.cookie}`;
