@@ -6,13 +6,16 @@ import { ArticleWriteComponent } from './article-write/article-write.component';
 import { ArticlePaginatedListComponent } from './article-pagenated-list/article-paginated-list.component';
 import { ArticleUpdateComponent } from './article-update/article-update.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { RoleGuard } from 'src/app/guards/role.guard';
 
 const routes: Routes = [
   {
     path: '', component: ArticlePaginatedListComponent
   }, 
   {
-    path: 'list', component: ArticleListComponent
+    path: 'list', component: ArticleListComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'ADMIN' }
   },
   {
     path: 'paginated-list', component: ArticlePaginatedListComponent
