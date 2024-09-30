@@ -9,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'articles',
-    loadChildren: () => import('./pages/article/article.module').then(m => m.ArticleModule)
+    loadChildren: () => import('./pages/article/article.module').then(m => m.ArticleModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
@@ -19,7 +20,11 @@ const routes: Routes = [
     path: 'my-page',
     loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'error',
+    loadChildren: () => import('./pages/error/error.module').then(m => m.ErrorModule)
+  },
 ];
 
 @NgModule({
