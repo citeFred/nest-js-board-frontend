@@ -5,6 +5,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { ArticleWriteComponent } from './article-write/article-write.component';
 import { ArticlePaginatedListComponent } from './article-pagenated-list/article-paginated-list.component';
 import { ArticleUpdateComponent } from './article-update/article-update.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,10 +21,12 @@ const routes: Routes = [
     path: 'detail/:id', component: ArticleDetailComponent
   },
   {
-    path: 'write', component: ArticleWriteComponent
+    path: 'write', component: ArticleWriteComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'update/:id', component: ArticleUpdateComponent
+    path: 'update/:id', component: ArticleUpdateComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
