@@ -7,6 +7,8 @@ import { ArticlePaginatedListComponent } from './article-pagenated-list/article-
 import { ArticleUpdateComponent } from './article-update/article-update.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { RoleGuard } from 'src/app/guards/role.guard';
+import { ArticleDetailResolver } from 'src/app/resolvers/article/article-detail.resolver';
+import { ArticlePagenatedListResolver } from 'src/app/resolvers/article/article-pagenated-list.resolver';
 
 const routes: Routes = [
   {
@@ -18,10 +20,12 @@ const routes: Routes = [
     data: { role: 'ADMIN' }
   },
   {
-    path: 'paginated-list', component: ArticlePaginatedListComponent
+    path: 'paginated-list', component: ArticlePaginatedListComponent,
+    resolve: { articles: ArticlePagenatedListResolver }
   },
   {
-    path: 'detail/:id', component: ArticleDetailComponent
+    path: 'detail/:id', component: ArticleDetailComponent,
+    resolve: { article: ArticleDetailResolver }
   },
   {
     path: 'write', component: ArticleWriteComponent,
