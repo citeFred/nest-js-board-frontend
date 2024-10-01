@@ -5,6 +5,10 @@ import { ArticleWithAttachmentAndUserResponseData } from 'src/app/models/article
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 
+interface RouteData {
+  article: ArticleWithAttachmentAndUserResponseData;
+}
+
 @Component({
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
@@ -23,35 +27,17 @@ export class ArticleDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadArticle();
+    this.route.data.subscribe((data) => {
+      console.log("ngOnInit 로드 시점")
+      const articleData = data as RouteData;
+      this.article = articleData.article;
+    });
   }
 
-  loadArticle() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.articleService.getArticleById(+id).subscribe({
-        next: response => {
-          if (response.success) {
-            this.article = response.data;
-          } else {
-            console.error(response.message);
-          }
-        },
-        error: err => {
-          console.error('Error fetching article:', err);
-        },
-        complete: () => {
-          console.log('Fetching an article request completed.');
-        }
-      });
-    } else {
-      console.error('Article ID is null');
-    }
-  }
   isImage(url: string): boolean {
     return url.match(/\.(jpeg|jpg|gif|png|bmp|webp)$/i) !== null;
   }
-  
+
   downloadFile(url: string) {
     fetch(url)
       .then(response => {
@@ -77,7 +63,7 @@ export class ArticleDetailComponent implements OnInit {
 
   updateArticle() {
     const articleId = this.route.snapshot.paramMap.get('id');
-    console.log("update article's id:"+articleId)
+    console.log("update article's id:" + articleId);
     if (articleId) {
       this.router.navigate(['articles/update', articleId]);
     } else {
@@ -137,4 +123,3 @@ export class ArticleDetailComponent implements OnInit {
     }
   }
 }
-
