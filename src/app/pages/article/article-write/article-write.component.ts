@@ -32,7 +32,7 @@ export class ArticleWriteComponent {
         next: response => {
           if (response.success) {
             console.log('Write an article successful:', response.data);
-            this.router.navigate(['articles']);
+            this.router.navigate(['articles/paginated-list']);
           } else {
             console.error('Write an article failed:', response.message);
           }
