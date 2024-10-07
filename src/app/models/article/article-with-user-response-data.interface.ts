@@ -2,10 +2,9 @@ export interface ArticleWithUserResponseData {
     id: number;
     title: string;
     contents: string;
-    author: string;
     createdAt: Date;
     updatedAt: Date;
-    user: {
+    author: {
         id: number;
         username: string;
         //...

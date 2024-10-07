@@ -13,7 +13,6 @@ export interface ArticleWithAttachmentAndUserResponseData {
     attachments: {
         id: number;
         filename: string;
-        path: string;
         url: string;
         //...
     }[];
