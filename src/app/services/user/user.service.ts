@@ -8,7 +8,8 @@ import { UserWithProfilePictureResponseData } from 'src/app/models/user/user-wit
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api/users';
+  // private apiUrl = 'http://localhost:3000/api/users'; // 로컬 테스트용
+  private apiUrl = 'http://43.200.247.144:3000/api/users'; // EC2 연결용
 
   constructor(private http: HttpClient) { }
 

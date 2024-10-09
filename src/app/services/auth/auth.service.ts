@@ -9,7 +9,8 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  // private apiUrl = 'http://localhost:3000/api/auth'; // 로컬 테스트용
+  private apiUrl = 'http://43.200.247.144:3000/api/auth'; // EC2 연결용
 
   constructor(private http: HttpClient) { }
 
