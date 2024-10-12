@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { SignInRequestData } from '../../models/auth/auth-signin-request-data.interface';
 import { AuthResponse } from '../../models/auth/auth-response.interface';
 import { jwtDecode } from "jwt-decode";
@@ -9,7 +9,8 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  // private apiUrl = 'http://localhost:3000/api/auth'; // 로컬 테스트용
+  private apiUrl = 'http://43.200.247.144:3000/api/auth'; // EC2 연결용
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +20,29 @@ export class AuthService {
 
   signIn(signInRequestData: SignInRequestData): Observable<AuthResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<AuthResponse>(`${this.apiUrl}/signin`, signInRequestData, { headers, withCredentials: true });
-  }
+    
+    return this.http.post<AuthResponse>(`${this.apiUrl}/signin`, signInRequestData, { headers, withCredentials: true, observe: 'response' }).pipe(
+        tap(response => {
+            // JWT를 Authorization 헤더에서 추출하여 로컬 스토리지에 저장
+            const jwtToken = response.headers.get('Authorization')?.split(' ')[1];
+            console.log("get"+jwtToken)
+
+            if (jwtToken) {
+                localStorage.setItem('jwtToken', jwtToken);
+                console.log("saved"+jwtToken)
+            }
+        }),
+        map(response => {
+            // response.body가 null이 아닐 때만 반환
+            if (response.body) {
+                return response.body; // AuthResponse 반환
+            }
+            throw new Error('Response body is null'); // null인 경우 예외 처리
+        })
+    );
+}
+
+
 
   getUserIdFromToken(): number | null {
     const token = this.getCookie('Authorization');
