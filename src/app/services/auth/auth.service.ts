@@ -10,7 +10,8 @@ import { jwtDecode } from "jwt-decode";
 })
 export class AuthService {
   // private apiUrl = 'http://localhost:3000/api/auth'; // 로컬 테스트용
-  private apiUrl = 'http://43.200.247.144:3000/api/auth'; // EC2 연결용
+  // private apiUrl = 'http://43.200.247.144:3000/api/auth'; // EC2 연결용
+  private apiUrl = 'https://api.boardapp.site:3001/api/auth'; // HTTPS 주소로 변경
 
   constructor(private http: HttpClient) { }
 

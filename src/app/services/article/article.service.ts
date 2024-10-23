@@ -11,7 +11,8 @@ import { ArticleWithUserResponseData } from 'src/app/models/article/article-with
 })
 export class ArticleService {
   // private apiUrl = 'http://localhost:3000/api/articles'; // 로컬 테스트용
-  private apiUrl = 'http://43.200.247.144:3000/api/articles'; // EC2 연결용
+  // private apiUrl = 'http://43.200.247.144:3000/api/articles'; // EC2 연결용
+  private apiUrl = 'https://api.boardapp.site:3001/api/articles'; // HTTPS 주소로 변경
 
   constructor(private http: HttpClient) { }
 
