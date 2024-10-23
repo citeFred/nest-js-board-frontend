@@ -43,11 +43,14 @@ export class AuthService {
     );
 }
 
-
+  // JWT 토큰을 로컬 스토리지에서 추출
+  private getToken(): string | null {
+    return localStorage.getItem('jwtToken');
+  }
 
   getUserIdFromToken(): number | null {
-    const token = this.getCookie('Authorization');
-    console.log("token:"+ token)
+    const token = this.getToken();
+    console.log("token:" + token);
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.userId;
@@ -56,7 +59,7 @@ export class AuthService {
   }
 
   getUserRoleFromToken(): string | null {
-    const token = this.getCookie('Authorization');
+    const token = this.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.role || null;
@@ -64,25 +67,13 @@ export class AuthService {
     return null;
   }
   
-  private getCookie(name: string): string | null {
-    const value = `; ${document.cookie}`;
-    console.log("document.cookie:"+ value)
-
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      const cookieValue = parts.pop()?.split(';').shift();
-      return cookieValue ? cookieValue : null;
-    }
-    return null;
-  }
-
   isLoggedIn(): boolean {
-    const token = this.getCookie('Authorization');
+    const token = this.getToken();
     return !!token;
   }
 
   getUserProfilePictureFromToken(): string | null {
-    const token = this.getCookie('Authorization');
+    const token = this.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.profilePictureUrl || null; // 프로필 사진 URL 반환
